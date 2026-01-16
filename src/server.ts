@@ -2,6 +2,12 @@ import app from "./app";
 
 const PORT = process.env.PORT || 3002;
 
+
+import connectDB from "./config/db";
+
+
+connectDB();
+
 app.listen(PORT, () => {
-  console.log("Server os running on a Port: ", PORT);
+  console.log(`Server is running on port ${PORT}`);
 });

@@ -10,7 +10,6 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "lint": "eslint ."
-
   },
   "keywords": [],
   "author": "",
@@ -20,10 +19,12 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "helmet": "^8.1.0"
+    "helmet": "^8.1.0",
+    "mongoose": "^9.1.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
+    "@types/mongoose": "^5.11.96",
     "@types/node": "^25.0.6",
     "@typescript-eslint/eslint-plugin": "^8.52.0",
     "@typescript-eslint/parser": "^8.52.0",
