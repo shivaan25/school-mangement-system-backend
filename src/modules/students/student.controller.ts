@@ -1,3 +1,17 @@
+import { Request, Response } from "express";
+import * as studentService from "./student.service";
+
+export const createStudent = async (req: Request, res: Response) => {
+  const student = await studentService.createStudent(req.body);
+  const studentJson = student.toJSON();
+  res.status(201).send(studentJson);
+};
+
+export const getStudents = async (req: Request, res: Response) => {
+  const students = await studentService.getStudent();
+  res.json(students);
+};
+
 /**
  * @swagger
  * /students:
@@ -26,6 +40,3 @@
  *       400:
  *         description: Validation error
  */
-export const createStudent = async (req, res) => {
-  // controller logic
-};
