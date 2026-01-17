@@ -10,6 +10,37 @@ export const createStudent = async (req: AuthRequest, res: Response) => {
   const studentJson = student.toJSON();
   res.status(201).send(studentJson);
 };
+/**
+ * @swagger
+ * /api/students:
+ *   post:
+ *     summary: Create a student (JWT required)
+ *     tags: [Students]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - school
+ *               - class
+ *               - rollNumber
+ *             properties:
+ *               school:
+ *                 type: string
+ *               class:
+ *                 type: string
+ *               rollNumber:
+ *                 type: number
+ *     responses:
+ *       201:
+ *         description: Student created successfully
+ *       401:
+ *         description: Unauthorized
+ */
 
 export const getStudents = async (req: AuthRequest, res: Response) => {
   const students = await studentService.getStudent();
@@ -18,29 +49,15 @@ export const getStudents = async (req: AuthRequest, res: Response) => {
 
 /**
  * @swagger
- * /students:
- *   post:
- *     summary: Create a new student
+ * /api/students:
+ *   get:
+ *     summary: Get all students (JWT required)
  *     tags: [Students]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - name
- *               - class
- *             properties:
- *               name:
- *                 type: string
- *                 example: Rahul Sharma
- *               class:
- *                 type: string
- *                 example: 10-A
+ *     security:
+ *       - bearerAuth: []
  *     responses:
- *       201:
- *         description: Student created successfully
- *       400:
- *         description: Validation error
+ *       200:
+ *         description: List of students
+ *       401:
+ *         description: Unauthorized
  */

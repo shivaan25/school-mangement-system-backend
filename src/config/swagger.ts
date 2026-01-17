@@ -1,34 +1,40 @@
-import swaggerJsdoc from "swagger-jsdoc";
+import swaggerJSDoc from "swagger-jsdoc";
 
-const options: swaggerJsdoc.Options = {
+const options: swaggerJSDoc.Options = {
   definition: {
     openapi: "3.0.0",
     info: {
       title: "School Management System API",
       version: "1.0.0",
-      description: "API Documentation for SMS backend",
+      description: "Backend APIs for School Management System",
     },
     servers: [
       {
-        url: "http://localhost:3002",
+        url: "http://localhost:3002/api-docs",
+        description: "Local server",
+      },
+    ],
+
+    // 🔐 JWT SECURITY CONFIG
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+
+    security: [
+      {
+        bearerAuth: [],
       },
     ],
   },
+
+  // 👇 IMPORTANT: where swagger will look for comments
   apis: ["./src/modules/**/*.ts"],
-  compoments: {
-    securitySchemes: {
-      bearerAuth: {
-        type: "http",
-        scheme: "bearer",
-        bearerFormat: "JWT",
-      },
-    },
-  },
-  security: [
-    {
-      bearerAuth: [],
-    },
-  ],
 };
 
-export const swaggerSpecs = swaggerJsdoc(options);
+export const swaggerSpecs = swaggerJSDoc(options);
