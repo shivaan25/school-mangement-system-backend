@@ -6,6 +6,6 @@ import authRoutes from "./modules/auth/auth.routes";
 const router = Router();
 router.use("/auth", authRoutes);
 router.use("/students", studentRoutes);
-router.use("/school", schoolRoutes);
+router.use("/schools", schoolRoutes);
 
 export default router;
