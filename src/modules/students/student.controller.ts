@@ -1,13 +1,17 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import * as studentService from "./student.service";
+import { AuthRequest } from "../../types/express";
 
-export const createStudent = async (req: Request, res: Response) => {
-  const student = await studentService.createStudent(req.body);
+export const createStudent = async (req: AuthRequest, res: Response) => {
+  const student = await studentService.createStudent({
+    ...req.body,
+    user: req.user!.userId,
+  });
   const studentJson = student.toJSON();
   res.status(201).send(studentJson);
 };
 
-export const getStudents = async (req: Request, res: Response) => {
+export const getStudents = async (req: AuthRequest, res: Response) => {
   const students = await studentService.getStudent();
   res.json(students);
 };

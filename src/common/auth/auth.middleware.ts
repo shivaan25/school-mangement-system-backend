@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { env } from "../../config/env";
 
 export const authMiddleware = (
-  req: Request & { user: any },
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -17,7 +17,7 @@ export const authMiddleware = (
 
   try {
     const tokenDecode = jwt.verify(token, env.JWT_SECRET);
-    req.user = tokenDecode;
+    (req as any).user = tokenDecode;
     next();
   } catch {
     return res.status(401).json({
