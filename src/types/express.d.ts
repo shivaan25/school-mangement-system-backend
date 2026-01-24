@@ -1,8 +1,15 @@
-import { Request } from "express";
+import { Types } from "mongoose";
 
-export interface AuthRequest extends Request {
-  user?: {
-    userId: string;
-    role: string;
-  };
+declare global {
+  namespace Express {
+    interface User {
+      id: Types.ObjectId;
+      role: "ADMIN" | "TEACHER" | "STUDENT";
+      school: Types.ObjectId;
+    }
+
+    interface Request {
+      user?: User;
+    }
+  }
 }

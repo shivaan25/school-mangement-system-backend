@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
 
 export type UserRole = "admin" | "teacher" | "student";
 
@@ -8,6 +8,7 @@ export interface UserDocument extends Document {
   password: string;
   role: UserRole;
   isActive: Boolean;
+  school: Types.ObjectId;
 }
 
 const userSchema = new Schema<UserDocument>(
@@ -36,6 +37,11 @@ const userSchema = new Schema<UserDocument>(
     isActive: {
       type: Boolean,
       default: true,
+    },
+    school: {
+      types: Schema.Types.ObjectId,
+      ref: "School",
+      required: false,
     },
   },
   {
