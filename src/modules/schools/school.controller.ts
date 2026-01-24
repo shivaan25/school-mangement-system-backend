@@ -1,9 +1,17 @@
 import { Request, Response } from "express";
 import * as schoolServices from "./school.service";
+import { User } from "../../models/User.model";
 
 export const createSchool = async (req: Request, res: Response) => {
   const { name } = req.body;
   const school = await schoolServices.createSchool(name);
+
+  // Link school to the user who created it
+  if ((req as any).user && (req as any).user.userId) {
+    await User.findByIdAndUpdate((req as any).user.userId, {
+      school: school._id,
+    });
+  }
 
   res.status(201).json(school);
 };

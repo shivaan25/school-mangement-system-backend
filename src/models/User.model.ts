@@ -39,7 +39,7 @@ const userSchema = new Schema<UserDocument>(
       default: true,
     },
     school: {
-      types: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "School",
       required: false,
     },
